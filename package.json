@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "npx eslint . --ext .js,.ts --max-warnings=0 && npx prettier --check **/*.{js,md,ts}"
   },
   "resolutions": {
     "styled-components": "^5"
@@ -15,10 +15,13 @@
     "@types/node": "20.4.6",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
     "axios": "^1.4.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
+    "eslint-plugin-no-only-tests": "^3.1.0",
     "framer-motion": "^10.15.0",
+    "husky": "^8.0.3",
     "moment": "^2.29.4",
     "next": "13.4.12",
     "react": "18.2.0",

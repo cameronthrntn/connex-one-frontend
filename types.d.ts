@@ -1,5 +1,3 @@
-import { Moment } from "moment";
-
 type Theme = "light" | "dark";
 
 interface ThemeObject {

@@ -13,13 +13,9 @@ export default function Home() {
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const { epoch, metrics } = await fetchData();
-        setServerTime(epoch);
-        setMetrics(metrics || "");
-      } catch (e) {
-        console.log({ e });
-      }
+      const { epoch, metrics } = await fetchData();
+      setServerTime(epoch);
+      setMetrics(metrics || "");
     };
     getData();
     const interval = setInterval(() => {
@@ -61,7 +57,7 @@ export default function Home() {
           </Difference>
         </Section>
         <Section>
-          <Title>Server Response metrics</Title>
+          <Title as="h2">Server Response metrics</Title>
           <Metrics>{metrics}</Metrics>
         </Section>
       </Main>
