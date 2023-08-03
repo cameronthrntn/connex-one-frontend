@@ -9,3 +9,9 @@ interface ThemeObject {
     red: string;
   };
 }
+
+interface ServerResponse {
+  epoch?: number;
+  metrics?: string;
+  message?: string;
+}

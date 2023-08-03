@@ -1,7 +1,39 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { fetchData } from "@/services/api";
+import moment from "moment";
 
 export default function Home() {
+  const [serverTime, setServerTime] = useState<number | undefined>();
+  const [metrics, setMetrics] = useState<string>("");
+  const [currentTime, setCurrentTime] = useState<number | undefined>();
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { epoch, metrics } = await fetchData();
+        setServerTime(epoch);
+        setMetrics(metrics || "");
+      } catch (e) {
+        console.log({ e });
+      }
+    };
+    getData();
+    const interval = setInterval(() => {
+      getData();
+    }, 30000);
+    const currentInterval = setInterval(() => {
+      setCurrentTime(Date.now());
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+      clearInterval(currentInterval);
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -16,17 +48,19 @@ export default function Home() {
       <Main>
         <Section $border>
           <Title>Server Time</Title>
-          <ServerTime>1691069728</ServerTime>
-          <Difference>-00:00:12</Difference>
+          <ServerTime>{serverTime ? serverTime : <Skeleton />}</ServerTime>
+          <Difference>
+            -
+            {moment()
+              .hour(0)
+              .minute(0)
+              .second(moment(currentTime).diff(serverTime, "seconds"))
+              .format("HH:mm:ss")}
+          </Difference>
         </Section>
         <Section>
           <Title>Server Response metrics</Title>
-          <Metrics>
-            const Main = styled.main border: 1px solid red; max-width: $ px;
-            height: 100vh; margin: 0 auto; display: flex; justify-content:
-            center; align-items: center; padding: 8px; box-sizing: border-box;
-            gap: 16px; ;
-          </Metrics>
+          <Metrics>{metrics}</Metrics>
         </Section>
       </Main>
     </>
@@ -71,6 +105,8 @@ const ServerTime = styled.h2`
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+  width: 100%;
+  text-align: center;
 `;
 
 const Difference = styled.p`
@@ -84,6 +120,9 @@ const Difference = styled.p`
 const Metrics = styled.code`
   border-radius: 16px;
   padding: 24px;
+  max-height: 300px;
+  width: 100%;
+  overflow-y: scroll;
   color: ${({ theme }) => theme.colors.code};
   background: ${({ theme }) => theme.colors.codeBlock};
 `;
