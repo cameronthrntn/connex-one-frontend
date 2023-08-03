@@ -1,38 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
 
-## Getting Started
+  <h1 align="center" style="color: #fff; font-weight: 600;">
+    Connex One Frontend
+  </h1>
 
-First, run the development server:
+  <p align="center" style="font-size: 1.2rem;">
+ This is Cameron Thornton's submission for the Frontend portion of the Connex One technical assessment, taken 03/08/2023.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+  </p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  <hr />
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+[zst]: https://zustand.surge.sh/
+[sty]: https://styled-components.com/
+[njs]: https://nextjs.org/
+[cyp]: https://www.cypress.io/
+[frm]: https://www.framer.com/motion/
+[atm]: https://atomicdesign.bradfrost.com/chapter-2/
+[cyp]: https://www.cypress.io/
+[rqu]: https://react-query-v3.tanstack.com/
+[d3]: https://d3js.org/
+[cjs]: https://www.chartjs.org/
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This project is being developed in [**NextJS**][njs], with [**styled-components**][sty] for styling, [**zustand**][zst] for state management, [**framer-motion**][frm] for animations, and [**cypress**][cyp] for end-to-end testing.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- ## 🎉 Installation and setup
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+  The general setup for this project is the same as any NextJS project, ensure you are using at least `Node 16.x` with `npm` installed, then install dependencies through
 
-## Learn More
+  ```bash
+    yarn
+  ```
 
-To learn more about Next.js, take a look at the following resources:
+  one can then spin up the dev server through
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  ```bash
+    yarn run dev
+  ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- ## 📖 Documentation
 
-## Deploy on Vercel
+  - ### 🚧 Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    This project uses React hooks for state management such as **useState** and **useEffect**. Functional components should be used where possible due to their reduced compile size and the phasing out of class-components by the react development team.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    The project also tries to follow an [**atomic**][atm] component structure. The basic idea being to split components into organisms, molecules and atoms. organisms being made of many molecules, and molecules being made of many atoms. This is a personal preference of mine and should ideally be adhered to where possible.
+
+  - ### ⚙️ State Management
+
+    State management is done through [**Zustand**][zst]. The store for zustand is currently located in the `services` directory.
+
+  - ### 🧪 Testing
+
+    This project uses [**Cypress**][cyp] for it's end-to-end testing. In order to run the tests locally you will ned to change the `NEXT_PUBLIC_NODE_ENV` value to `test` in order to get tests to run (unauthenticated).
+
+    To open the cypress console and run individual spex files run
+
+    ```bash
+    npx cypress open
+    ```
+
+    and to run the entire test suite in-terminal use
+
+    ```bash
+    npx cypress run
+    ```
+
+</p>
