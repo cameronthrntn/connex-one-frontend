@@ -1,7 +1,8 @@
 import type { AppProps } from "next/app";
 import { Theme, ThemeObject } from "../../types";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import { Inter } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import StyledComponentsRegistry from "@/lib/registry";
 import { defaultTheme, light, dark } from "../../theme";
 
@@ -45,6 +46,18 @@ export default function App({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={{ ...defaultTheme, ...themes[theme] }}>
       <StyledComponentsRegistry>
         <GlobalStyle theme={themes[theme]} />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={1000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable={false}
+          pauseOnHover
+          theme="dark"
+        />
         <Component {...pageProps} />
       </StyledComponentsRegistry>
     </ThemeProvider>

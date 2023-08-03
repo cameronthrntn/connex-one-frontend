@@ -1,15 +1,23 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import { fetchData } from "@/services/api";
 import moment from "moment";
+import { toast } from "react-toastify";
+import "react-loading-skeleton/dist/skeleton.css";
+
+const toastSettings = {
+  pending: "Fetching New Data",
+  success: "Server Time Updated!",
+  error: "An Error Occured!",
+};
 
 export default function Home() {
   const [serverTime, setServerTime] = useState<number | undefined>();
   const [metrics, setMetrics] = useState<string>("");
   const [currentTime, setCurrentTime] = useState<number | undefined>();
+  const theme = useTheme();
 
   useEffect(() => {
     const getData = async () => {
@@ -17,9 +25,10 @@ export default function Home() {
       setServerTime(epoch);
       setMetrics(metrics || "");
     };
-    getData();
+    toast.promise(getData, toastSettings);
+
     const interval = setInterval(() => {
-      getData();
+      toast.promise(getData, toastSettings);
     }, 30000);
 
     const currentInterval = setInterval(() => {
@@ -58,7 +67,19 @@ export default function Home() {
         </Section>
         <Section>
           <Title as="h2">Server Response metrics</Title>
-          <Metrics>{metrics}</Metrics>
+          <Metrics>
+            {metrics ? (
+              metrics
+            ) : (
+              <Skeleton
+                count={5}
+                height={15}
+                style={{ marginBottom: 8 }}
+                baseColor={theme.colors.skeletonbase}
+                highlightColor={theme.colors.text}
+              />
+            )}
+          </Metrics>
         </Section>
       </Main>
     </>
@@ -100,6 +121,7 @@ const Section = styled.section<{ $left?: boolean }>`
       $left ? `1px solid ${theme.colors.text}` : "none"};
     border-right: none;
     padding: 16px;
+    justify-content: ${({ $left }) => ($left ? "center" : "flex-start")};
   }
 `;
 

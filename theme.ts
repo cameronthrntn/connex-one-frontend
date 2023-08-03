@@ -23,5 +23,6 @@ export const light = {
     red: "#B40E0E",
     codeBlock: "#303030",
     code: "#FFF",
+    skeletonbase: "#494949",
   },
 };
