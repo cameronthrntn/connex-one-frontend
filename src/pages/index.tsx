@@ -68,7 +68,8 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}>
+                exit={{ opacity: 0 }}
+                data-cy="skeleton-time">
                 <Skeleton height={40} width={300} />
               </motion.div>
             )}
@@ -98,7 +99,8 @@ export default function Home() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}>
+                  exit={{ opacity: 0 }}
+                  data-cy="skeleton-metrics">
                   <Skeleton
                     count={5}
                     height={15}
