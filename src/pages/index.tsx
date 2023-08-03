@@ -118,7 +118,7 @@ export default function Home() {
   );
 }
 
-const Main = styled.main`
+const Main = styled.div`
   max-width: ${({ theme }) => theme.sizes.maxWidth}px;
   height: 100vh;
   margin: 0 auto;

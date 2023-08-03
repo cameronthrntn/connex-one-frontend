@@ -53,7 +53,6 @@ export default function App({ Component, pageProps }: AppProps) {
           newestOnTop={false}
           closeOnClick
           rtl={false}
-          pauseOnFocusLoss={false}
           draggable={false}
           pauseOnHover
           theme="dark"
