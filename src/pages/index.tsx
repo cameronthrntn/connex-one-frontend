@@ -6,6 +6,7 @@ import { fetchData } from "@/services/api";
 import moment from "moment";
 import { toast } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
+import { AnimatePresence, motion } from "framer-motion";
 
 const toastSettings = {
   pending: "Fetching New Data",
@@ -55,7 +56,23 @@ export default function Home() {
       <Main>
         <Section $left>
           <Title>Server Time</Title>
-          <ServerTime>{serverTime ? serverTime : <Skeleton />}</ServerTime>
+          <AnimatePresence>
+            {serverTime ? (
+              <ServerTime
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}>
+                {serverTime}
+              </ServerTime>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}>
+                <Skeleton height={40} width={300} />
+              </motion.div>
+            )}
+          </AnimatePresence>
           <Difference>
             -
             {moment()
@@ -67,18 +84,31 @@ export default function Home() {
         </Section>
         <Section>
           <Title as="h2">Server Response metrics</Title>
-          <Metrics>
-            {metrics ? (
-              metrics
-            ) : (
-              <Skeleton
-                count={5}
-                height={15}
-                style={{ marginBottom: 8 }}
-                baseColor={theme.colors.skeletonbase}
-                highlightColor={theme.colors.text}
-              />
-            )}
+          <Metrics layout="size" transition={{ duration: 0.5 }}>
+            <AnimatePresence>
+              {metrics ? (
+                <MetricText
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ delay: 0.7 }}>
+                  {metrics}
+                </MetricText>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}>
+                  <Skeleton
+                    count={5}
+                    height={15}
+                    style={{ marginBottom: 8 }}
+                    baseColor={theme.colors.skeletonbase}
+                    highlightColor={theme.colors.text}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </Metrics>
         </Section>
       </Main>
@@ -132,7 +162,7 @@ const Title = styled.h1`
   line-height: normal;
 `;
 
-const ServerTime = styled.h2`
+const ServerTime = styled(motion.h2)`
   font-size: 36px;
   font-style: normal;
   font-weight: 300;
@@ -152,16 +182,21 @@ const Difference = styled.p`
   line-height: normal;
 `;
 
-const Metrics = styled.code`
+const Metrics = styled(motion.code)`
   border-radius: 16px;
   padding: 24px;
   max-height: 300px;
   width: 100%;
   overflow-y: scroll;
-  color: ${({ theme }) => theme.colors.code};
   background: ${({ theme }) => theme.colors.codeBlock};
   @media (max-width: ${({ theme }) => theme.sizes.tablet}px) {
     padding: 12px;
     max-height: 500px;
   }
+`;
+
+const MetricText = styled(motion.code)`
+  color: ${({ theme }) => theme.colors.code};
+  font-family: Inter;
+  font-size: 10px;
 `;
