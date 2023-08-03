@@ -5,7 +5,7 @@ import apiConfig from "@/services/apiConfig";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ServerResponse>
+  res: NextApiResponse<ServerResponse>,
 ) {
   try {
     const [
