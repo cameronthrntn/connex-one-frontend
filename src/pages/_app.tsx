@@ -5,8 +5,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import StyledComponentsRegistry from "@/lib/registry";
 import { defaultTheme, light, dark } from "../../theme";
+import { useThemeStore } from "@/services/store";
 
 const GlobalStyle = createGlobalStyle<{ theme: ThemeObject }>`
+  * {
+    transition: 0.3s ease-in-out;
+    transition-property: background, background-color
+  }
   p {
     margin: 0;
     margin-bottom: 16px;
@@ -40,7 +45,7 @@ type Themes = {
 
 export default function App({ Component, pageProps }: AppProps) {
   const themes: Themes = { light, dark };
-  const theme = "light";
+  const { theme } = useThemeStore(state => state);
 
   return (
     <ThemeProvider theme={{ ...defaultTheme, ...themes[theme] }}>

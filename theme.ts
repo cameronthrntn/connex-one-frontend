@@ -12,7 +12,9 @@ export const dark = {
     text: "#FFF",
     red: "#DE1818",
     codeBlock: "#5A5A5A",
-    code: "#000",
+    code: "#FFF",
+    skeletonbase: "#494949",
+    toggleSwitch: "#D0D0D0",
   },
 };
 
@@ -24,5 +26,6 @@ export const light = {
     codeBlock: "#303030",
     code: "#FFF",
     skeletonbase: "#494949",
+    toggleSwitch: "#D0D0D0",
   },
 };

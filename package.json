@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "npx eslint . --ext .js,.ts --max-warnings=0 && npx prettier --check **/*.{js,md,ts}"
+    "lint": "npx eslint . --ext .js,.ts --max-warnings=0 && npx prettier --check **/*.{js,tsx,md,ts}"
   },
   "resolutions": {
     "styled-components": "^5"
