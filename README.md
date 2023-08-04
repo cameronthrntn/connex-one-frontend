@@ -32,6 +32,8 @@ This project is being developed in [**NextJS**][njs], with [**styled-components*
     yarn
   ```
 
+  **A token will be required to make any requests. This token can be added to a .env file at the root of the project under the key of SECRET. A BASEURL will also need to be specified before running the development server, this will just be the base url your API is being served too.**
+
   one can then spin up the dev server through
 
   ```bash
