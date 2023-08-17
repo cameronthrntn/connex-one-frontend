@@ -208,7 +208,7 @@ const Metrics = styled(motion.div)`
   background: ${({ theme }) => theme.colors.codeBlock};
   @media (max-width: ${({ theme }) => theme.sizes.tablet}px) {
     padding: 12px;
-    max-height: 500px;
+    max-height: 350px;
   }
 `;
 
