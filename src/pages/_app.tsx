@@ -40,7 +40,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeObject }>`
 `;
 
 type Themes = {
-  [K in Theme]: ThemeObject;
+  [K in Theme as string]: ThemeObject;
 };
 
 export default function App({ Component, pageProps }: AppProps) {

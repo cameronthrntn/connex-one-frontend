@@ -1,6 +1,6 @@
-type Theme = "light" | "dark";
+export type Theme = "light" | "dark";
 
-interface ThemeObject {
+export interface ThemeObject {
   colors: {
     main: string;
     text: string;
@@ -8,7 +8,7 @@ interface ThemeObject {
   };
 }
 
-interface ServerResponse {
+export interface ServerResponse {
   epoch?: number;
   metrics?: string;
   message?: string;
